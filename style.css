@@ -5,6 +5,7 @@
     --blue-box: #00bcd4;
     --gold-box: #ffb300;
     --ribbon: #ffffff;
+    --green-box: #4caf50;
 }
 
 body {
@@ -80,6 +81,31 @@ body {
     width: 100%;
     max-width: 1200px;
     z-index: 10;
+}
+
+.gift-container.green .box-body, 
+.gift-container.green .box-lid { 
+    background-color: var(--green-box); 
+}
+
+.click-hint {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* ปรับให้การ์ดในกล่องเขียวลอยสูงขึ้นเล็กน้อยเผื่อข้อความยาว */
+.gift-container.green.open .message-card {
+    transform: translateX(-50%) translateY(-240px);
 }
 
 /* Gift Box */
