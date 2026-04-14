@@ -1,0 +1,218 @@
+:root {
+    --bg-start: #ffdde1;
+    --bg-end: #ee9ca7;
+    --pink-box: #ff4081;
+    --blue-box: #00bcd4;
+    --gold-box: #ffb300;
+    --ribbon: #ffffff;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* พื้นหลังฟองสบู่ */
+.bubbles .bubble {
+    position: absolute;
+    bottom: -100px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: bubbleRise 10s infinite ease-in;
+}
+.bubbles .bubble:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-duration: 8s; }
+.bubbles .bubble:nth-child(2) { left: 30%; animation-delay: 2s; }
+.bubbles .bubble:nth-child(3) { left: 70%; width: 60px; height: 60px; animation-delay: 4s; }
+.bubbles .bubble:nth-child(4) { left: 90%; animation-delay: 1s; }
+
+@keyframes bubbleRise {
+    0% { transform: translateY(0); opacity: 0.5; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* --- ส่วนที่แก้ไขใน style.css --- */
+
+.title-section {
+    text-align: center;
+    margin-bottom: 100px; /* เพิ่มระยะห่างอีกนิดเพื่อให้ดูโปร่ง */
+    z-index: 5;
+    perspective: 1000px; /* เพิ่มมิติ */
+}
+
+.title-section h1 {
+    font-family: 'Pattaya', sans-serif;
+    font-size: 4.5rem; /* ขยายใหญ่อีกนิด */
+    color: white;
+    margin: 0 0 15px 0; /* ปรับ Margin */
+    text-shadow: 0 4px 15px rgba(236, 64, 122, 0.5); /* เงาสีชมพู นุ่มๆ */
+    animation: titleFloat 3s infinite ease-in-out; /* เพิ่มแอนิเมชันลอยเบาๆ */
+}
+
+/* --- สไตล์ใหม่สำหรับ Subtitle --- */
+
+.special-subtitle {
+    font-size: 1.4rem; /* ขนาดกำลังดี */
+    font-weight: 300;
+    color: #5d4037; /* สีน้ำตาลเข้ม นุ่มนวล */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* ระยะห่างระหว่างไอคอนและตัวอักษร */
+    opacity: 0.9;
+}
+
+/* เทคนิคทำตัวอักษรไล่เฉดสี (Gradient Text) */
+.gradient-text {
+    background: linear-gradient(120deg, #ff4081 0%, #ffb300 50%, #00bcd4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600; /* ทำให้ตัวหนาขึ้นนิดนึงเพื่อเห็นเฉดสีชัด */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.05); /* เงาบางๆ */
+}
+
+/* สไตล์สำหรับไอคอนวิ้งๆ ✨ */
+.sparkle {
+    font-size: 1.6rem;
+    animation: sparkleBlink 2s infinite; /* แอนิเมชันกะพริบ */
+    filter: drop-shadow(0 0 5px rgba(255, 213, 79, 0.8));
+}
+
+/* --- แอนิเมชันใหม่ --- */
+
+/* หัวข้อใหญ่ลอยเบาๆ */
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ไอคอนวิ้งๆ กะพริบ */
+@keyframes sparkleBlink {
+    0%, 100% { opacity: 0.5; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.main-container {
+    display: flex;
+    gap: 80px; /* เพิ่มระยะห่างระหว่างกล่อง */
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Gift Box - ขยายให้ใหญ่ขึ้น */
+.gift-container {
+    position: relative;
+    width: 240px;  /* ใหญ่ขึ้นจากเดิม 160px */
+    height: 180px; /* ใหญ่ขึ้นจากเดิม 120px */
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.gift-container:hover {
+    transform: scale(1.1) translateY(-10px);
+}
+
+.box-body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--gold-box);
+    border-radius: 0 0 15px 15px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.box-lid {
+    width: 110%;
+    height: 45px;
+    background-color: var(--gold-box);
+    position: absolute;
+    top: -40px;
+    left: -5%;
+    border-radius: 10px;
+    z-index: 11;
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* Ribbons */
+.box-body::before, .box-lid::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 100%;
+    background: var(--ribbon);
+    opacity: 0.9;
+}
+
+/* Box Colors */
+.gift-container.pink .box-body, .gift-container.pink .box-lid { background-color: var(--pink-box); }
+.gift-container.blue .box-body, .gift-container.blue .box-lid { background-color: var(--blue-box); }
+
+/* Message Card - ปรับขนาดและตำแหน่ง */
+.message-card {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    padding: 25px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s ease;
+    z-index: 1;
+}
+
+.message-card h3 {
+    margin: 0 0 12px 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.message-card p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Open Animation */
+.gift-container.open .box-lid {
+    transform: translateY(-150px) rotate(-20deg);
+    opacity: 0;
+}
+
+.gift-container.open .message-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-220px);
+}
+
+.heart {
+    position: absolute;
+    font-size: 30px;
+    z-index: 20;
+    animation: fly 2s forwards;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-200px) translateX(var(--x)) rotate(360deg); opacity: 0; }
+}
