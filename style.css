@@ -7,10 +7,6 @@
     --ribbon: #ffffff;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 body {
     background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
     font-family: 'Kanit', sans-serif;
@@ -21,115 +17,131 @@ body {
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
-    padding: 5vw;
+    padding: 20px; /* เพิ่ม Padding กันขอบจอ */
+    box-sizing: border-box;
+}
+
+/* Background Bubbles */
+.bubbles .bubble {
+    position: absolute;
+    bottom: -100px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: bubbleRise 10s infinite ease-in;
+    z-index: 1;
+}
+
+@keyframes bubbleRise {
+    0% { transform: translateY(0); opacity: 0.5; }
+    100% { transform: translateY(-120vh); opacity: 0; }
 }
 
 /* Title Section */
 .title-section {
     text-align: center;
-    margin-bottom: 8vh;
+    margin-bottom: 60px;
+    z-index: 5;
     width: 100%;
 }
 
 .title-section h1 {
     font-family: 'Pattaya', sans-serif;
-    font-size: clamp(2rem, 10vw, 4.5rem);
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* ปรับขนาดตามความกว้างจออัตโนมัติ */
     color: white;
-    text-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
-    margin: 0;
+    margin: 0 0 10px 0;
+    text-shadow: 0 4px 15px rgba(236, 64, 122, 0.5);
 }
 
 .special-subtitle {
-    font-size: clamp(0.9rem, 3vw, 1.3rem);
-    margin-top: 10px;
+    font-size: clamp(1rem, 4vw, 1.4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .gradient-text {
-    background: linear-gradient(120deg, #ff4081, #ffb300, #00bcd4);
+    background: linear-gradient(120deg, #ff4081 0%, #ffb300 50%, #00bcd4 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     font-weight: 600;
 }
 
-/* Container */
+/* Main Container - หัวใจสำคัญของ Responsive */
 .main-container {
     display: flex;
+    gap: 60px;
+    flex-wrap: wrap; /* ทำให้กล่องตกลงมาเมื่อพื้นที่ไม่พอ */
     justify-content: center;
     align-items: center;
-    gap: 5vw; /* เว้นระยะห่างตามความกว้างจอ */
     width: 100%;
-    max-width: 1400px;
-    flex-wrap: wrap;
+    max-width: 1200px;
+    z-index: 10;
 }
 
-/* Gift Container - ขนาดปรับตามหน้าจอ */
-.gift-item {
-    perspective: 1000px;
-}
-
+/* Gift Box */
 .gift-container {
     position: relative;
-    /* ใช้ vw เพื่อให้ขนาดกล่องเปลี่ยนตามความกว้างจอ */
-    width: clamp(150px, 20vw, 250px); 
-    height: clamp(110px, 15vw, 180px);
+    width: 220px;  /* ปรับเล็กลงนิดหน่อยเพื่อให้ลงตัวใน iPad */
+    height: 160px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .gift-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-10px);
 }
 
 .box-body {
     width: 100%;
     height: 100%;
     background-color: var(--gold-box);
-    border-radius: 0 0 1vw 1vw;
+    border-radius: 0 0 15px 15px;
     position: relative;
     z-index: 10;
-    box-shadow: 0 1vw 2vw rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .box-lid {
     width: 110%;
-    height: 25%; /* สูงเป็น % ของตัวกล่อง */
+    height: 40px;
     background-color: var(--gold-box);
     position: absolute;
-    top: -22%;
+    top: -35px;
     left: -5%;
-    border-radius: 0.5vw;
+    border-radius: 8px;
     z-index: 11;
     transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* Ribbons */
 .box-body::before, .box-lid::before {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 18%; /* กว้างตามสัดส่วนกล่อง */
+    width: 35px;
     height: 100%;
     background: var(--ribbon);
     opacity: 0.9;
 }
 
-/* Colors */
 .gift-container.pink .box-body, .gift-container.pink .box-lid { background-color: var(--pink-box); }
 .gift-container.blue .box-body, .gift-container.blue .box-lid { background-color: var(--blue-box); }
 
-/* Message Card - ปรับขนาดตามกล่อง */
+/* Message Card */
 .message-card {
     position: absolute;
-    bottom: 10%;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%; /* กว้างเกือบเท่าตัวกล่อง */
-    padding: 1.5vw;
+    width: 200px;
+    padding: 20px;
     background: white;
-    border-radius: 1vw;
-    box-shadow: 0 1vw 3vw rgba(0,0,0,0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     text-align: center;
     opacity: 0;
     visibility: hidden;
@@ -137,47 +149,73 @@ body {
     z-index: 1;
 }
 
-.message-card h3 { 
-    margin: 0 0 0.5vw 0; 
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-}
-
-.message-card p { 
-    font-size: clamp(0.7rem, 1.2vw, 0.95rem); 
-    color: #666; 
-    line-height: 1.4;
-    margin: 0;
-}
-
-/* Open Animation */
-.gift-container.open .box-lid {
-    transform: translateY(-8vw) rotate(-15deg);
+/* --- ส่วนที่ 1: ปรับแต่ง Message Card --- */
+.message-card {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    text-align: center;
     opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s ease;
+    /* แก้ไข/เพิ่มตรงนี้: มั่นใจว่า z-index สูงกว่ากล่อง */
+    z-index: 20; 
+}
+
+/* --- ส่วนที่ 2: ปรับสถานะเมื่อเปิดกล่อง (Open State) --- */
+.gift-container.open .box-lid {
+    transform: translateY(-120px) rotate(-15deg);
+    opacity: 0;
+    z-index: 5; /* ลด z-index ของฝาลง */
+}
+
+.gift-container.open .box-body {
+    z-index: 5; /* ลด z-index ของตัวกล่องลง */
 }
 
 .gift-container.open .message-card {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(-12vw);
+    /* ปรับ translateY จาก -200px เป็น -220px หรือมากกว่าเพื่อให้ลอยพ้นกล่อง */
+    transform: translateX(-50%) translateY(-220px); 
+    z-index: 25; /* ให้การ์ดอยู่หน้าสุด */
 }
 
-/* สำหรับมือถือแนวตั้ง (Mobile) */
-@media (max-width: 768px) {
+/* Media Queries สำหรับมือถือหน้าจอเล็ก */
+@media (max-width: 600px) {
     .main-container {
-        flex-direction: column; /* เรียงเป็นแนวตั้ง */
-        gap: 15vh; /* เพิ่มระยะแนวตั้งเพื่อให้การ์ดไม่ทับกัน */
+        gap: 120px; /* เพิ่มระยะห่างแนวตั้งตอนเรียงต่อกัน เพื่อไม่ให้การ์ดทับกล่องบน */
+        margin-top: 40px;
     }
     
     .gift-container {
-        width: 60vw; /* ในมือถือให้กล่องกว้าง 60% ของจอ */
-        height: 45vw;
+        width: 180px; /* ปรับกล่องให้เล็กลงในมือถือ */
+        height: 140px;
     }
 
+    .title-section {
+        margin-bottom: 40px;
+    }
+    
     .message-card {
-        padding: 4vw;
+        width: 160px;
     }
+}
 
-    .gift-container.open .message-card {
-        transform: translateX(-50%) translateY(-50vw); /* ดันการ์ดขึ้นสูงขึ้นในมือถือ */
-    }
+.heart {
+    position: absolute;
+    font-size: 25px;
+    z-index: 20;
+    animation: fly 2s forwards;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-150px) translateX(var(--x)) rotate(360deg); opacity: 0; }
 }
