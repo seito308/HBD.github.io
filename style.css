@@ -17,10 +17,11 @@ body {
     align-items: center;
     justify-content: center;
     overflow-x: hidden;
-    position: relative;
+    padding: 20px; /* เพิ่ม Padding กันขอบจอ */
+    box-sizing: border-box;
 }
 
-/* พื้นหลังฟองสบู่ */
+/* Background Bubbles */
 .bubbles .bubble {
     position: absolute;
     bottom: -100px;
@@ -29,99 +30,69 @@ body {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     animation: bubbleRise 10s infinite ease-in;
+    z-index: 1;
 }
-.bubbles .bubble:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-duration: 8s; }
-.bubbles .bubble:nth-child(2) { left: 30%; animation-delay: 2s; }
-.bubbles .bubble:nth-child(3) { left: 70%; width: 60px; height: 60px; animation-delay: 4s; }
-.bubbles .bubble:nth-child(4) { left: 90%; animation-delay: 1s; }
 
 @keyframes bubbleRise {
     0% { transform: translateY(0); opacity: 0.5; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+    100% { transform: translateY(-120vh); opacity: 0; }
 }
 
-/* --- ส่วนที่แก้ไขใน style.css --- */
-
+/* Title Section */
 .title-section {
     text-align: center;
-    margin-bottom: 100px; /* เพิ่มระยะห่างอีกนิดเพื่อให้ดูโปร่ง */
+    margin-bottom: 60px;
     z-index: 5;
-    perspective: 1000px; /* เพิ่มมิติ */
+    width: 100%;
 }
 
 .title-section h1 {
     font-family: 'Pattaya', sans-serif;
-    font-size: 4.5rem; /* ขยายใหญ่อีกนิด */
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* ปรับขนาดตามความกว้างจออัตโนมัติ */
     color: white;
-    margin: 0 0 15px 0; /* ปรับ Margin */
-    text-shadow: 0 4px 15px rgba(236, 64, 122, 0.5); /* เงาสีชมพู นุ่มๆ */
-    animation: titleFloat 3s infinite ease-in-out; /* เพิ่มแอนิเมชันลอยเบาๆ */
+    margin: 0 0 10px 0;
+    text-shadow: 0 4px 15px rgba(236, 64, 122, 0.5);
 }
 
-/* --- สไตล์ใหม่สำหรับ Subtitle --- */
-
 .special-subtitle {
-    font-size: 1.4rem; /* ขนาดกำลังดี */
-    font-weight: 300;
-    color: #5d4037; /* สีน้ำตาลเข้ม นุ่มนวล */
-    margin: 0;
+    font-size: clamp(1rem, 4vw, 1.4rem);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* ระยะห่างระหว่างไอคอนและตัวอักษร */
-    opacity: 0.9;
+    gap: 10px;
 }
 
-/* เทคนิคทำตัวอักษรไล่เฉดสี (Gradient Text) */
 .gradient-text {
     background: linear-gradient(120deg, #ff4081 0%, #ffb300 50%, #00bcd4 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-weight: 600; /* ทำให้ตัวหนาขึ้นนิดนึงเพื่อเห็นเฉดสีชัด */
-    text-shadow: 0 2px 4px rgba(0,0,0,0.05); /* เงาบางๆ */
+    font-weight: 600;
 }
 
-/* สไตล์สำหรับไอคอนวิ้งๆ ✨ */
-.sparkle {
-    font-size: 1.6rem;
-    animation: sparkleBlink 2s infinite; /* แอนิเมชันกะพริบ */
-    filter: drop-shadow(0 0 5px rgba(255, 213, 79, 0.8));
-}
-
-/* --- แอนิเมชันใหม่ --- */
-
-/* หัวข้อใหญ่ลอยเบาๆ */
-@keyframes titleFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* ไอคอนวิ้งๆ กะพริบ */
-@keyframes sparkleBlink {
-    0%, 100% { opacity: 0.5; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
-
+/* Main Container - หัวใจสำคัญของ Responsive */
 .main-container {
     display: flex;
-    gap: 80px; /* เพิ่มระยะห่างระหว่างกล่อง */
-    flex-wrap: wrap;
+    gap: 60px;
+    flex-wrap: wrap; /* ทำให้กล่องตกลงมาเมื่อพื้นที่ไม่พอ */
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
     z-index: 10;
 }
 
-/* Gift Box - ขยายให้ใหญ่ขึ้น */
+/* Gift Box */
 .gift-container {
     position: relative;
-    width: 240px;  /* ใหญ่ขึ้นจากเดิม 160px */
-    height: 180px; /* ใหญ่ขึ้นจากเดิม 120px */
+    width: 220px;  /* ปรับเล็กลงนิดหน่อยเพื่อให้ลงตัวใน iPad */
+    height: 160px;
     cursor: pointer;
     transition: all 0.4s ease;
 }
 
 .gift-container:hover {
-    transform: scale(1.1) translateY(-10px);
+    transform: scale(1.05) translateY(-10px);
 }
 
 .box-body {
@@ -136,41 +107,38 @@ body {
 
 .box-lid {
     width: 110%;
-    height: 45px;
+    height: 40px;
     background-color: var(--gold-box);
     position: absolute;
-    top: -40px;
+    top: -35px;
     left: -5%;
-    border-radius: 10px;
+    border-radius: 8px;
     z-index: 11;
     transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
-/* Ribbons */
 .box-body::before, .box-lid::before {
     content: '';
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 40px;
+    width: 35px;
     height: 100%;
     background: var(--ribbon);
     opacity: 0.9;
 }
 
-/* Box Colors */
 .gift-container.pink .box-body, .gift-container.pink .box-lid { background-color: var(--pink-box); }
 .gift-container.blue .box-body, .gift-container.blue .box-lid { background-color: var(--blue-box); }
 
-/* Message Card - ปรับขนาดและตำแหน่ง */
+/* Message Card */
 .message-card {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 220px;
-    padding: 25px;
+    width: 200px;
+    padding: 20px;
     background: white;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
@@ -181,38 +149,50 @@ body {
     z-index: 1;
 }
 
-.message-card h3 {
-    margin: 0 0 12px 0;
-    color: #333;
-    font-weight: 600;
-}
+.message-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; }
+.message-card p { font-size: 0.9rem; color: #666; line-height: 1.5; margin: 0; }
 
-.message-card p {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.6;
-}
-
-/* Open Animation */
+/* Open State */
 .gift-container.open .box-lid {
-    transform: translateY(-150px) rotate(-20deg);
+    transform: translateY(-120px) rotate(-15deg);
     opacity: 0;
 }
 
 .gift-container.open .message-card {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(-220px);
+    transform: translateX(-50%) translateY(-200px);
+}
+
+/* Media Queries สำหรับมือถือหน้าจอเล็ก */
+@media (max-width: 600px) {
+    .main-container {
+        gap: 120px; /* เพิ่มระยะห่างแนวตั้งตอนเรียงต่อกัน เพื่อไม่ให้การ์ดทับกล่องบน */
+        margin-top: 40px;
+    }
+    
+    .gift-container {
+        width: 180px; /* ปรับกล่องให้เล็กลงในมือถือ */
+        height: 140px;
+    }
+
+    .title-section {
+        margin-bottom: 40px;
+    }
+    
+    .message-card {
+        width: 160px;
+    }
 }
 
 .heart {
     position: absolute;
-    font-size: 30px;
+    font-size: 25px;
     z-index: 20;
     animation: fly 2s forwards;
 }
 
 @keyframes fly {
     0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-200px) translateX(var(--x)) rotate(360deg); opacity: 0; }
+    100% { transform: translateY(-150px) translateX(var(--x)) rotate(360deg); opacity: 0; }
 }
