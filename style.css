@@ -214,6 +214,19 @@ body {
     z-index: 20;
     animation: fly 2s forwards;
 }
+.footer-notice {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px; /* เว้นระยะห่างจากกล่องของขวัญ */
+}
+
+.footer-notice p {
+    font-size: 11px; /* ขนาดตัวอักษรเล็กๆ */
+    color: rgba(17, 0, 255, 0.7); /* สีขาวจางๆ เพื่อไม่ให้แย่งความสนใจ */
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
 
 @keyframes fly {
     0% { transform: translateY(0); opacity: 1; }
